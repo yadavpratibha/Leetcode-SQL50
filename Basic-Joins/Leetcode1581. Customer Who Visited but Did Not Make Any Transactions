@@ -1,0 +1,9 @@
+SELECT customer_id, count(customer_id) AS count_no_trans
+FROM (
+    SELECT * FROM Visits AS v 
+    LEFT JOIN 
+    Transactions AS t 
+    USING(visit_id) 
+    WHERE t.visit_id IS NULL
+) AS temp
+GROUP BY customer_id
