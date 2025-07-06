@@ -1,0 +1,8 @@
+SELECT st.student_id, st.student_name, sub.subject_name, count(e.student_id) AS attended_exams
+FROM Students AS st
+CROSS JOIN
+Subjects AS sub -- List subject for each student
+LEFT JOIN Examinations AS e -- we can show '0' for subjects students didnt take
+ON e.student_id=st.student_id AND e.subject_name=sub.subject_name
+GROUP BY st.student_id, st.student_name, sub.subject_name
+ORDER BY st.student_id, st.student_name, sub.subject_name 
