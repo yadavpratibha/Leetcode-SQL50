@@ -1,0 +1,7 @@
+SELECT m.name AS name
+FROM Employee AS e
+CROSS JOIN
+Employee AS m
+ON e.managerId=m.id
+GROUP BY m.id
+HAVING count(m.id)>=5
