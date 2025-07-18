@@ -1,0 +1,12 @@
+SELECT person_name
+FROM (
+    -- ORDER BY clause in the OVER clause helps us finding the running average or cumulative aggregation as
+    -- the records get added
+    SELECT turn, person_name, SUM(weight) OVER(ORDER BY turn) as wt
+    FROM Queue
+) AS temp
+-- temp table contains the running sum of weight when ordered by turn
+-- arrange temp in descending order to find person with weight<1000 with limit1
+WHERE wt<=1000
+ORDER BY turn DESC
+LIMIT 1
